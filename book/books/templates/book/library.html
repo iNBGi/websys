@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Posting Site</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="background-color:#D8D8D8;">
+<nav class="navbar navbar-light" style="background-color:#408E91;">
+    <a class="navbar-link btn-lg" href="{% url 'index' %}" style="background-color:#245953;color:#Ffff;">Library App</a>
+    <a class="navbar-link btn-lg" href="{% url 'index' %}" style="background-color:#245953;color:#Ffff;">DataFlair</a>
+<a href="{% url 'admin:index' %}" class = 'navbar-link btn-lg' style="background-color:#245953;color:#Ffff;">Admin</a>
+    <a href="{% url 'upload-book' %}" class="navbar-link btn-lg" style="background-color:#245953;color:#Ffff;">Upload Post</a>
+</nav>
+<br>
+{% block content %}
+<div class="card-columns">
+    {% for post in shelf %}
+    <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{{ post.picture.url }}">
+  <div class="card-body">
+    <h5 class="card-title">{{ post.name }}</h5>
+    <p class="card-text">{{ post.describe }}</p>
+   <div class="card-footer bg-transparent border-dark">
+   <p class="card-title">{{post.author}}</p>
+   <center>
+       <a href="update/{{post.id}}" class="btn btn-warning" style="background-color:#245953;color:#Ffff;" id = '{{post.id}}'>edit</a>
+       <a href="delete/{{post.id}}" class="btn btn-danger" id = '{{post.id}}'>delete</a>
+    </center>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+</div>
+{% endblock %}
+</body>
+</html>
